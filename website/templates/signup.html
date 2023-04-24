@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center mb-4">{% block title %} Sign Up {% endblock %}</h1>
+          <form method="post">
+
+            <!-- Username input -->
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" required>
+            </div>
+
+            <!-- Email input -->
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-group">
+              <label for="password1">Password</label>
+              <input type="password" id="password1" name="password" class="form-control" placeholder="Enter your password" required>
+            </div>
+
+            <!-- Repeat Password input -->
+            <div class="form-group">
+              <label for="password2">Confirm Password</label>
+              <input type="password" id="password2" name="password2" class="form-control" placeholder="Confirm your password" required>
+            </div>
+
+            <!-- Checkbox -->
+            <div class="form-group form-check">
+              <input class="form-check-input" type="checkbox" value="" id="registerCheck" checked>
+              <label class="form-check-label" for="registerCheck">
+                I have read and agree to the terms
+              </label>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
