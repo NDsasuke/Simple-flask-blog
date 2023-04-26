@@ -14,10 +14,10 @@
         {% if current_user.is_authenticated %}
           {% if current_user.id == post.author %}
             <div class="mt-4">
-              <a href="{{ url_for('views.edit', id=post.id) }}" class="btn btn-primary">
+              <a href="{{ url_for('views.edit', post_id=post.id) }}" class="btn btn-primary">
                 <i class="bi bi-pencil"></i> Edit
               </a>
-              <form action="{{ url_for('views.delete_post', id=post.id) }}" method="post" class="d-inline">
+              <form action="{{ url_for('views.delete_post', post_id=post.id) }}" method="post" class="d-inline">
                 <input type="hidden" name="_method" value="DELETE">
                 <button class="btn btn-danger" type="submit">
                   <i class="bi bi-trash"></i> Delete
