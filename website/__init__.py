@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
+import datetime
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -32,4 +33,11 @@ def create_app():
     with app.app_context():
         db.create_all()
 
-        return app
+    def datetimeformat(value, format='%b %d, %Y'):
+        return value.strftime(format)
+
+    app.jinja_env.filters['datetimeformat'] = datetimeformat
+
+
+    return app
+

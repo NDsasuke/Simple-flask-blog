@@ -8,14 +8,14 @@
           <div class="card-body p-4">
             <h1 class="mb-4">{% block title %} Login {% endblock %}</h1>
             <form method="POST">
-              <div class="form-floating mb-3">
-                <input type="email" id="email" name="email" class="form-control" placeholder="name@example.com" required />
+              <div class="form-group">
                 <label for="email">Email address</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="name@example.com" required />
               </div>
 
-              <div class="form-floating mb-3">
-                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
+              <div class="form-group">
                 <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
               </div>
 
               <div class="form-check mb-3">
@@ -25,12 +25,11 @@
 
               <button type="submit" class="btn btn-primary btn-block mb-4">Log in</button>
             </form>
-            
             <div class="d-flex justify-content-between">
               <a href="#!">Forgot password?</a>
               <a href="{{url_for('auth.sign_up')}}">Not a member? Sign up</a>
             </div>
-            
+
             <hr class="my-4">
           </div>
         </div>

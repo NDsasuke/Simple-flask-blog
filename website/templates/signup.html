@@ -10,34 +10,34 @@
           <form method="post">
 
             <!-- Username input -->
-            <div class="form-group">
+            <div class="form-group mb-3">
               <label for="username">Username</label>
               <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" required>
             </div>
 
             <!-- Email input -->
-            <div class="form-group">
+            <div class="form-group mb-3">
               <label for="email">Email</label>
               <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
             </div>
 
             <!-- Password input -->
-            <div class="form-group">
+            <div class="form-group mb-3">
               <label for="password1">Password</label>
               <input type="password" id="password1" name="password1" class="form-control" placeholder="Enter your password" required>
             </div>
 
             <!-- Repeat Password input -->
-            <div class="form-group">
+            <div class="form-group mb-3">
               <label for="password2">Confirm Password</label>
               <input type="password" id="password2" name="password2" class="form-control" placeholder="Confirm your password" required>
             </div>
 
             <!-- Checkbox -->
             <div class="form-group form-check">
-              <input class="form-check-input" type="checkbox" value="" id="registerCheck" checked>
+              <input class="form-check-input" type="checkbox" value="" id="registerCheck" checked required>
               <label class="form-check-label" for="registerCheck">
-                I have read and agree to the terms
+                I have read and agree to the <a href="{{ url_for('views.terms') }}">terms</a>
               </label>
             </div>
 
@@ -45,6 +45,10 @@
             <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
 
           </form>
+          <div class="text-center mt-3">
+            <span>Already have an account?</span>
+            <a href="{{ url_for('auth.login') }}" class="link-primary">Log in</a>
+          </div>
         </div>
       </div>
     </div>

@@ -1,16 +1,35 @@
 {% extends 'base.html' %}
-            
+
 {% block content %}
 
-    <h1>{% block title %} Welcome to FlaskBlog {% endblock %}</h1>
-    {% for post in posts %}
-    <a href="{{ url_for('post', post_id=post['id']) }}">
-        <h2>{{ post['title'] }}</h2>
-    </a>
-    <span class="badge badge-primary">{{ post['created'] }}</span>
-    <a href="{{ url_for('edit', id=post['id']) }}">
-        <span class="badge badge-warning">Edit</span>
-    </a>
-    <hr>
-{% endfor %}
+  <div class="container">
+    <h1 class="my-4">{% block title %} Welcome to FlaskBlog {% endblock %}</h1>
+    
+    {% if posts %}
+      {% for post in posts %}
+        <div class="card mb-4">
+          <div class="card-body">
+            <a href="{{ url_for('post', post_id=post['id']) }}">
+              <h2 class="card-title">{{ post['title'] }}</h2>
+            </a>
+            <p class="card-text">{{ post['content'] }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">{{ post['created']|datetimeformat('%b %d, %Y') }}</small>
+              {% if current_user == post['author'] %}
+                <a href="{{ url_for('edit', id=post['id']) }}">
+                  <span class="badge bg-warning text-dark">Edit</span>
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="alert alert-info" role="alert">
+        There are no posts yet. <a href="{{ url_for('views.create') }}" class="alert-link">Create a new post</a> to get started.
+      </div>
+    {% endif %}
+  
+  </div>
+
 {% endblock %}
