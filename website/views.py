@@ -76,7 +76,7 @@ def edit(post_id):
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
 
-    if post.author != current_user:
+    if not current_user.is_authenticated or post.author != current_user.id:
         abort(403)
 
     db.session.delete(post)
