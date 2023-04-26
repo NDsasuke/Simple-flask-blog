@@ -1,42 +1,18 @@
-from flask import Blueprint, render_template, request, flash, url_for, redirect
-import sqlite3
-from werkzeug.exceptions import abort
+from flask import Blueprint, render_template
+from flask_login import login_required, current_user
 
-views = Blueprint("views",__name__)
+views = Blueprint("views", __name__)
 
-@views.route("/home")
 @views.route("/")
+@views.route("/home")
+@login_required
 def home():
-    return render_template("home.html")
+    return render_template("home.html", name=current_user.username)
 
 @views.route('/create', methods=('GET', 'POST'))
 def create():
-    if request.method == 'POST':
-        title = request.form['title']
-        content = request.form['content']
+      return render_template('create.html')
 
-        if not title:
-            flash('Title is required!')
-        else:
-            conn = get_db_connection()
-            conn.execute('INSERT INTO posts (title, content) VALUES (?, ?)',
-                         (title, content))
-            conn.commit()
-            conn.close()
-            return redirect(url_for('index'))
-    
-    return render_template('create.html')
-
-def get_db_connection():
-    conn = sqlite3.connect('database.db')
-    conn.row_factory = sqlite3.Row
-    return conn
-
-def get_post(post_id):
-    conn = get_db_connection()
-    post = conn.execute('SELECT * FROM posts WHERE id = ?',
-                        (post_id,)).fetchone()
-    conn.close()
-    if post is None:
-        abort(404)
-    return post
+@views.route('/terms', methods=('GET', 'POST'))
+def terms():
+      return render_template('terms.html')
