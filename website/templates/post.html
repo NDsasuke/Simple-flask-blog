@@ -1,7 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>{% block title %} {{ post['title'] }} {% endblock %}</h2>
-    <span class="badge badge-primary">{{ post['created'] }}</span>
-    <p>{{ post['content'] }}</p>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <h1 class="mt-4 mb-3 display-4">{{ post.title }}</h1>
+        <p class="lead">
+          by <span class="font-weight-bold"><a href="/post/{{post.user.username}}" class="text-dark">{{post.user.username}}</a></span>
+        </p>
+        <hr>
+        <p class="fs-5">{{ post.content }}</p>
+        {% if current_user.is_authenticated %}
+          {% if current_user.id == post.author %}
+            <div class="mt-4">
+              <a href="{{ url_for('views.edit', id=post.id) }}" class="btn btn-primary">
+                <i class="bi bi-pencil"></i> Edit
+              </a>
+              <form action="{{ url_for('views.delete_post', id=post.id) }}" method="post" class="d-inline">
+                <input type="hidden" name="_method" value="DELETE">
+                <button class="btn btn-danger" type="submit">
+                  <i class="bi bi-trash"></i> Delete
+                </button>
+              </form>
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
 {% endblock %}
